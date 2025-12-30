@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Task Manager</title>
+</head>
+<body>
+
+<h2>Add Task</h2>
+<form action="/addTask" method="post">
+    Summary: <input type="text" name="summary" required><br><br>
+    URL: <input type="text" name="url"><br><br>
+    Description:<br>
+    <textarea name="description"></textarea><br><br>
+    <button type="submit">Add Task</button>
+</form>
+
+<hr>
+
+<h2>Task List</h2>
+<table border="1">
+    <tr>
+        <th>Summary</th>
+        <th>URL</th>
+        <th>Description</th>
+        <th>Action</th>
+    </tr>
+
+    <tr th:each="task : ${tasks}">
+        <td th:text="${task.summary}"></td>
+        <td th:text="${task.url}"></td>
+        <td th:text="${task.description}"></td>
+        <td>
+            <a th:href="@{/sendEmail/{id}(id=${task.id})}">
+                Send Email
+            </a>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
